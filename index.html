@@ -1,0 +1,1110 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>K-POP 아이돌 소개 사이트</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            color: #333;
+        }
+
+        .header {
+            text-align: center;
+            padding: 40px 20px;
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            margin-bottom: 30px;
+        }
+
+        .header h1 {
+            color: white;
+            font-size: 3rem;
+            margin-bottom: 10px;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+        }
+
+        .header p {
+            color: rgba(255, 255, 255, 0.9);
+            font-size: 1.2rem;
+        }
+
+        .container {
+            max-width: 1800px;
+            margin: 0 auto;
+            padding: 0 20px;
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr;
+            gap: 20px;
+        }
+
+        .section {
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 20px;
+            padding: 30px;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+            backdrop-filter: blur(10px);
+        }
+
+        .section h2 {
+            text-align: center;
+            margin-bottom: 25px;
+            font-size: 2rem;
+            padding: 15px;
+            border-radius: 15px;
+            color: white;
+            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.3);
+        }
+
+        .boy-groups h2 {
+            background: linear-gradient(45deg, #4facfe 0%, #00f2fe 100%);
+        }
+
+        .generation-section {
+            margin-bottom: 40px;
+        }
+
+        .generation-title {
+            text-align: center;
+            margin-bottom: 20px;
+            font-size: 1.5rem;
+            padding: 12px 20px;
+            border-radius: 10px;
+            color: white;
+            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.3);
+        }
+
+        .gen1 { background: linear-gradient(45deg, #667eea 0%, #764ba2 100%); }
+        .gen2 { background: linear-gradient(45deg, #f093fb 0%, #f5576c 100%); }
+        .gen3 { background: linear-gradient(45deg, #4facfe 0%, #00f2fe 100%); }
+        .gen4 { background: linear-gradient(45deg, #43e97b 0%, #38f9d7 100%); }
+
+        .girl-groups h2 {
+            background: linear-gradient(45deg, #fa709a 0%, #fee140 100%);
+        }
+
+        .idol-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 15px;
+        }
+
+        .idol-card {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 10px 20px;
+            border-radius: 15px;
+            text-align: center;
+            font-weight: bold;
+            font-size: 1.1rem;
+            transition: all 0.3s ease;
+            cursor: pointer;
+            position: relative;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .idol-name {
+            font-size: 1.1rem;
+            font-weight: bold;
+        }
+
+        .debut-year {
+            font-size: 0.9rem;
+            opacity: 0.8;
+            font-weight: normal;
+        }
+
+        .idol-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+            transition: left 0.5s ease;
+        }
+
+        .idol-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.2);
+        }
+
+        .idol-card:hover::before {
+            left: 100%;
+        }
+
+        .boy-groups .idol-card {
+            background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+        }
+
+        .girl-groups .idol-card {
+            background: linear-gradient(135deg, #fa709a 0%, #fee140 100%);
+        }
+
+        .mixed-groups h2 {
+            background: linear-gradient(45deg, #667eea 0%, #764ba2 100%);
+        }
+
+        .mixed-groups .idol-card {
+            background: linear-gradient(135deg, #a8edea 0%, #fed6e3 100%);
+        }
+
+        .stats {
+            display: flex;
+            justify-content: space-around;
+            margin-top: 20px;
+            padding: 20px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 15px;
+        }
+
+        .stat-item {
+            text-align: center;
+            color: white;
+        }
+
+        .stat-number {
+            font-size: 2rem;
+            font-weight: bold;
+            display: block;
+        }
+
+        .stat-label {
+            font-size: 0.9rem;
+            opacity: 0.8;
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                grid-template-columns: 1fr;
+                gap: 20px;
+            }
+
+            .header h1 {
+                font-size: 2rem;
+            }
+
+            .idol-grid {
+                grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+                gap: 10px;
+            }
+
+            .idol-card {
+                padding: 8px 15px;
+                font-size: 1rem;
+            }
+
+            .section {
+                padding: 20px;
+            }
+        }
+
+        .search-box {
+            margin: 20px 0;
+            text-align: center;
+        }
+
+        .search-input {
+            padding: 12px 20px;
+            border: none;
+            border-radius: 25px;
+            font-size: 1rem;
+            width: 300px;
+            max-width: 100%;
+            background: rgba(255, 255, 255, 0.9);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        .search-input:focus {
+            outline: none;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.2);
+        }
+
+        .hidden {
+            display: none !important;
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <h1>🎵 K-POP 아이돌 소개 🎵</h1>
+        <p>남성 그룹과 여성 그룹으로 분류된 K-POP 아이돌들</p>
+        
+        <div class="search-box">
+            <input type="text" class="search-input" placeholder="아이돌 그룹 검색..." id="searchInput">
+        </div>
+
+        <div class="stats">
+            <div class="stat-item">
+                <span class="stat-number" id="boyGroupCount">65</span>
+                <span class="stat-label">남성 그룹</span>
+            </div>
+            <div class="stat-item">
+                <span class="stat-number" id="girlGroupCount">45</span>
+                <span class="stat-label">여성 그룹</span>
+            </div>
+            <div class="stat-item">
+                <span class="stat-number" id="mixedGroupCount">7</span>
+                <span class="stat-label">혼성 그룹</span>
+            </div>
+            <div class="stat-item">
+                <span class="stat-number" id="totalCount">117</span>
+                <span class="stat-label">전체</span>
+            </div>
+        </div>
+    </div>
+
+    <div class="container">
+        <div class="section boy-groups">
+            <h2>👨‍🎤 남성 그룹 (세대별)</h2>
+            
+            <!-- 1세대 -->
+            <div class="generation-section">
+                <div class="generation-title gen1">🌟 1세대 (1990년대 후반)</div>
+                <div class="idol-grid">
+                    <div class="idol-card">
+                        <div class="idol-name">H.O.T</div>
+                        <div class="debut-year">1996</div>
+                    </div>
+                    <div class="idol-card">
+                        <div class="idol-name">젝스키스</div>
+                        <div class="debut-year">1997</div>
+                    </div>
+                    <div class="idol-card">
+                        <div class="idol-name">태사자</div>
+                        <div class="debut-year">1997</div>
+                    </div>
+                    <div class="idol-card">
+                        <div class="idol-name">NRG</div>
+                        <div class="debut-year">1997</div>
+                    </div>
+                    <div class="idol-card">
+                        <div class="idol-name">신화</div>
+                        <div class="debut-year">1998</div>
+                    </div>
+                    <div class="idol-card">
+                        <div class="idol-name">god</div>
+                        <div class="debut-year">1999</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 2세대 -->
+            <div class="generation-section">
+                <div class="generation-title gen2">🔥 2세대 (2000년대 초~2010년대 초)</div>
+                <div class="idol-grid">
+                    <div class="idol-card">
+                        <div class="idol-name">동방신기</div>
+                        <div class="debut-year">2003</div>
+                    </div>
+                    <div class="idol-card">
+                        <div class="idol-name">슈퍼주니어</div>
+                        <div class="debut-year">2005</div>
+                    </div>
+                    <div class="idol-card">
+                        <div class="idol-name">빅뱅</div>
+                        <div class="debut-year">2006</div>
+                    </div>
+                    <div class="idol-card">
+                        <div class="idol-name">샤이니</div>
+                        <div class="debut-year">2008</div>
+                    </div>
+                    <div class="idol-card">
+                        <div class="idol-name">2PM</div>
+                        <div class="debut-year">2008</div>
+                    </div>
+                    <div class="idol-card">
+                        <div class="idol-name">비스트</div>
+                        <div class="debut-year">2009</div>
+                    </div>
+                    <div class="idol-card">
+                        <div class="idol-name">MBLAQ</div>
+                        <div class="debut-year">2009</div>
+                    </div>
+                    <div class="idol-card">
+                        <div class="idol-name">인피니트</div>
+                        <div class="debut-year">2010</div>
+                    </div>
+                    <div class="idol-card">
+                        <div class="idol-name">틴탑</div>
+                        <div class="debut-year">2010</div>
+                    </div>
+                    <div class="idol-card">
+                        <div class="idol-name">B1A4</div>
+                        <div class="debut-year">2011</div>
+                    </div>
+                    <div class="idol-card">
+                        <div class="idol-name">블락비</div>
+                        <div class="debut-year">2011</div>
+                    </div>
+                    <div class="idol-card">
+                        <div class="idol-name">비투비</div>
+                        <div class="debut-year">2012</div>
+                    </div>
+                    <div class="idol-card">
+                        <div class="idol-name">빅스</div>
+                        <div class="debut-year">2012</div>
+                    </div>
+                    <div class="idol-card">
+                        <div class="idol-name">EXO</div>
+                        <div class="debut-year">2012</div>
+                    </div>
+                    <div class="idol-card">
+                        <div class="idol-name">방탄소년단</div>
+                        <div class="debut-year">2013</div>
+                    </div>
+                    <div class="idol-card">
+                        <div class="idol-name">POW</div>
+                        <div class="debut-year">2013</div>
+                    </div>
+                    <div class="idol-card">
+                        <div class="idol-name">GOT7</div>
+                        <div class="debut-year">2014</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 3세대 -->
+            <div class="generation-section">
+                <div class="generation-title gen3">⚡ 3세대 (2010년대 중반~후반)</div>
+                <div class="idol-grid">
+                    <div class="idol-card">
+                        <div class="idol-name">위너</div>
+                        <div class="debut-year">2014</div>
+                    </div>
+                    <div class="idol-card">
+                        <div class="idol-name">DAY6</div>
+                        <div class="debut-year">2015</div>
+                    </div>
+                    <div class="idol-card">
+                        <div class="idol-name">몬스타엑스</div>
+                        <div class="debut-year">2015</div>
+                    </div>
+                    <div class="idol-card">
+                        <div class="idol-name">세븐틴</div>
+                        <div class="debut-year">2015</div>
+                    </div>
+                    <div class="idol-card">
+                        <div class="idol-name">IKON</div>
+                        <div class="debut-year">2015</div>
+                    </div>
+                    <div class="idol-card">
+                        <div class="idol-name">NCT</div>
+                        <div class="debut-year">2016</div>
+                    </div>
+                    <div class="idol-card">
+                        <div class="idol-name">업텐션</div>
+                        <div class="debut-year">2016</div>
+                    </div>
+                    <div class="idol-card">
+                        <div class="idol-name">SF9</div>
+                        <div class="debut-year">2016</div>
+                    </div>
+                    <div class="idol-card">
+                        <div class="idol-name">빅톤</div>
+                        <div class="debut-year">2016</div>
+                    </div>
+                    <div class="idol-card">
+                        <div class="idol-name">펜타곤</div>
+                        <div class="debut-year">2016</div>
+                    </div>
+                    <div class="idol-card">
+                        <div class="idol-name">ASTRO</div>
+                        <div class="debut-year">2016</div>
+                    </div>
+                    <div class="idol-card">
+                        <div class="idol-name">STRAY KIDS</div>
+                        <div class="debut-year">2017</div>
+                    </div>
+                    <div class="idol-card">
+                        <div class="idol-name">골든차일드</div>
+                        <div class="debut-year">2017</div>
+                    </div>
+                    <div class="idol-card">
+                        <div class="idol-name">A.C.E</div>
+                        <div class="debut-year">2017</div>
+                    </div>
+                    <div class="idol-card">
+                        <div class="idol-name">하이라이트</div>
+                        <div class="debut-year">2017</div>
+                    </div>
+                    <div class="idol-card">
+                        <div class="idol-name">더보이즈</div>
+                        <div class="debut-year">2017</div>
+                    </div>
+                    <div class="idol-card">
+                        <div class="idol-name">위아이</div>
+                        <div class="debut-year">2017</div>
+                    </div>
+                    <div class="idol-card">
+                        <div class="idol-name">온앤오프</div>
+                        <div class="debut-year">2017</div>
+                    </div>
+                    <div class="idol-card">
+                        <div class="idol-name">에이티즈</div>
+                        <div class="debut-year">2018</div>
+                    </div>
+                    <div class="idol-card">
+                        <div class="idol-name">저스트비</div>
+                        <div class="debut-year">2018</div>
+                    </div>
+                    <div class="idol-card">
+                        <div class="idol-name">VERIVERY</div>
+                        <div class="debut-year">2019</div>
+                    </div>
+                    <div class="idol-card">
+                        <div class="idol-name">원어스</div>
+                        <div class="debut-year">2019</div>
+                    </div>
+                    <div class="idol-card">
+                        <div class="idol-name">AB6IX</div>
+                        <div class="debut-year">2019</div>
+                    </div>
+                    <div class="idol-card">
+                        <div class="idol-name">투모로우바이투게더</div>
+                        <div class="debut-year">2019</div>
+                    </div>
+                    <div class="idol-card">
+                        <div class="idol-name">CIX</div>
+                        <div class="debut-year">2019</div>
+                    </div>
+                    <div class="idol-card">
+                        <div class="idol-name">온리원오브</div>
+                        <div class="debut-year">2019</div>
+                    </div>
+                    <div class="idol-card">
+                        <div class="idol-name">DKZ</div>
+                        <div class="debut-year">2019</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 4세대 -->
+            <div class="generation-section">
+                <div class="generation-title gen4">🚀 4세대 (2020년대~)</div>
+                <div class="idol-grid">
+                    <div class="idol-card">
+                        <div class="idol-name">ENHYPEN</div>
+                        <div class="debut-year">2020</div>
+                    </div>
+                    <div class="idol-card">
+                        <div class="idol-name">TREASURE</div>
+                        <div class="debut-year">2020</div>
+                    </div>
+                    <div class="idol-card">
+                        <div class="idol-name">BAE173</div>
+                        <div class="debut-year">2020</div>
+                    </div>
+                    <div class="idol-card">
+                        <div class="idol-name">MCND</div>
+                        <div class="debut-year">2020</div>
+                    </div>
+                    <div class="idol-card">
+                        <div class="idol-name">TO1</div>
+                        <div class="debut-year">2020</div>
+                    </div>
+                    <div class="idol-card">
+                        <div class="idol-name">앤팀</div>
+                        <div class="debut-year">2020</div>
+                    </div>
+                    <div class="idol-card">
+                        <div class="idol-name">CRAVITY</div>
+                        <div class="debut-year">2020</div>
+                    </div>
+                    <div class="idol-card">
+                        <div class="idol-name">루셈블</div>
+                        <div class="debut-year">2020</div>
+                    </div>
+                    <div class="idol-card">
+                        <div class="idol-name">P1Harmony</div>
+                        <div class="debut-year">2020</div>
+                    </div>
+                    <div class="idol-card">
+                        <div class="idol-name">LUCY</div>
+                        <div class="debut-year">2020</div>
+                    </div>
+                    <div class="idol-card">
+                        <div class="idol-name">판타지보이즈</div>
+                        <div class="debut-year">2021</div>
+                    </div>
+                    <div class="idol-card">
+                        <div class="idol-name">호라이즌</div>
+                        <div class="debut-year">2021</div>
+                    </div>
+                    <div class="idol-card">
+                        <div class="idol-name">OMEGA X</div>
+                        <div class="debut-year">2021</div>
+                    </div>
+                    <div class="idol-card">
+                        <div class="idol-name">XDINARY HEROES</div>
+                        <div class="debut-year">2021</div>
+                    </div>
+                    <div class="idol-card">
+                        <div class="idol-name">EPEX</div>
+                        <div class="debut-year">2021</div>
+                    </div>
+                    <div class="idol-card">
+                        <div class="idol-name">블리처스</div>
+                        <div class="debut-year">2021</div>
+                    </div>
+                    <div class="idol-card">
+                        <div class="idol-name">TEMPEST</div>
+                        <div class="debut-year">2022</div>
+                    </div>
+                    <div class="idol-card">
+                        <div class="idol-name">ATBO</div>
+                        <div class="debut-year">2022</div>
+                    </div>
+                    <div class="idol-card">
+                        <div class="idol-name">YOUNITE</div>
+                        <div class="debut-year">2022</div>
+                    </div>
+                    <div class="idol-card">
+                        <div class="idol-name">TRENDZ</div>
+                        <div class="debut-year">2022</div>
+                    </div>
+                    <div class="idol-card">
+                        <div class="idol-name">N.SSIGN</div>
+                        <div class="debut-year">2023</div>
+                    </div>
+                    <div class="idol-card">
+                        <div class="idol-name">라이즈</div>
+                        <div class="debut-year">2023</div>
+                    </div>
+                    <div class="idol-card">
+                        <div class="idol-name">플레이브</div>
+                        <div class="debut-year">2023</div>
+                    </div>
+                    <div class="idol-card">
+                        <div class="idol-name">KISS OF LIFE</div>
+                        <div class="debut-year">2023</div>
+                    </div>
+                    <div class="idol-card">
+                        <div class="idol-name">미래소년</div>
+                        <div class="debut-year">2023</div>
+                    </div>
+                    <div class="idol-card">
+                        <div class="idol-name">제로베이스원</div>
+                        <div class="debut-year">2023</div>
+                    </div>
+                    <div class="idol-card">
+                        <div class="idol-name">8TURN</div>
+                        <div class="debut-year">2023</div>
+                    </div>
+                    <div class="idol-card">
+                        <div class="idol-name">BOYNEXTDOOR</div>
+                        <div class="debut-year">2023</div>
+                    </div>
+                    <div class="idol-card">
+                        <div class="idol-name">XODIAC</div>
+                        <div class="debut-year">2023</div>
+                    </div>
+                    <div class="idol-card">
+                        <div class="idol-name">루네이트</div>
+                        <div class="debut-year">2023</div>
+                    </div>
+                    <div class="idol-card">
+                        <div class="idol-name">앰퍼샌드원</div>
+                        <div class="debut-year">2023</div>
+                    </div>
+                    <div class="idol-card">
+                        <div class="idol-name">엑신</div>
+                        <div class="debut-year">2023</div>
+                    </div>
+                    <div class="idol-card">
+                        <div class="idol-name">Xikers</div>
+                        <div class="debut-year">2023</div>
+                    </div>
+                    <div class="idol-card">
+                        <div class="idol-name">리원오브</div>
+                        <div class="debut-year">2023</div>
+                    </div>
+                    <div class="idol-card">
+                        <div class="idol-name">TWS</div>
+                        <div class="debut-year">2024</div>
+                    </div>
+                    <div class="idol-card">
+                        <div class="idol-name">VERRY</div>
+                        <div class="debut-year">2024</div>
+                    </div>
+                    <div class="idol-card">
+                        <div class="idol-name">JX</div>
+                        <div class="debut-year">2024</div>
+                    </div>
+                    <div class="idol-card">
+                        <div class="idol-name">사자보이즈</div>
+                        <div class="debut-year">2025</div>
+                    </div>
+                    <div class="idol-card">
+                        <div class="idol-name">NouerA</div>
+                        <div class="debut-year">2025</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="section girl-groups">
+            <h2>👩‍🎤 여성 그룹 (세대별)</h2>
+            
+            <!-- 1세대 -->
+            <div class="generation-section">
+                <div class="generation-title gen1">🌟 1세대 (1990년대 후반)</div>
+                <div class="idol-grid">
+                    <div class="idol-card">
+                        <div class="idol-name">베이비복스</div>
+                        <div class="debut-year">1997</div>
+                    </div>
+                    <div class="idol-card">
+                        <div class="idol-name">S.E.S</div>
+                        <div class="debut-year">1997</div>
+                    </div>
+                    <div class="idol-card">
+                        <div class="idol-name">핑클</div>
+                        <div class="debut-year">1998</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 2세대 -->
+            <div class="generation-section">
+                <div class="generation-title gen2">🔥 2세대 (2000년대 후반~2010년대 초)</div>
+                <div class="idol-grid">
+                    <div class="idol-card">
+                        <div class="idol-name">브라운아이드걸스</div>
+                        <div class="debut-year">2006</div>
+                    </div>
+                    <div class="idol-card">
+                        <div class="idol-name">원더걸스</div>
+                        <div class="debut-year">2007</div>
+                    </div>
+                    <div class="idol-card">
+                        <div class="idol-name">소녀시대</div>
+                        <div class="debut-year">2007</div>
+                    </div>
+                    <div class="idol-card">
+                        <div class="idol-name">카라</div>
+                        <div class="debut-year">2007</div>
+                    </div>
+                    <div class="idol-card">
+                        <div class="idol-name">아이유</div>
+                        <div class="debut-year">2008</div>
+                    </div>
+                    <div class="idol-card">
+                        <div class="idol-name">2NE1</div>
+                        <div class="debut-year">2009</div>
+                    </div>
+                    <div class="idol-card">
+                        <div class="idol-name">티아라</div>
+                        <div class="debut-year">2009</div>
+                    </div>
+                    <div class="idol-card">
+                        <div class="idol-name">시크릿</div>
+                        <div class="debut-year">2009</div>
+                    </div>
+                    <div class="idol-card">
+                        <div class="idol-name">포미닛</div>
+                        <div class="debut-year">2009</div>
+                    </div>
+                    <div class="idol-card">
+                        <div class="idol-name">애프터스쿨</div>
+                        <div class="debut-year">2009</div>
+                    </div>
+                    <div class="idol-card">
+                        <div class="idol-name">f(x)</div>
+                        <div class="debut-year">2009</div>
+                    </div>
+                    <div class="idol-card">
+                        <div class="idol-name">레인보우</div>
+                        <div class="debut-year">2009</div>
+                    </div>
+                    <div class="idol-card">
+                        <div class="idol-name">미쓰에이</div>
+                        <div class="debut-year">2010</div>
+                    </div>
+                    <div class="idol-card">
+                        <div class="idol-name">걸스데이</div>
+                        <div class="debut-year">2010</div>
+                    </div>
+                    <div class="idol-card">
+                        <div class="idol-name">씨스타</div>
+                        <div class="debut-year">2010</div>
+                    </div>
+                    <div class="idol-card">
+                        <div class="idol-name">나인뮤지스</div>
+                        <div class="debut-year">2010</div>
+                    </div>
+                    <div class="idol-card">
+                        <div class="idol-name">에이핑크</div>
+                        <div class="debut-year">2011</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 3세대 -->
+            <div class="generation-section">
+                <div class="generation-title gen3">⚡ 3세대 (2010년대 중반~후반)</div>
+                <div class="idol-grid">
+                    <div class="idol-card">
+                        <div class="idol-name">AOA</div>
+                        <div class="debut-year">2012</div>
+                    </div>
+                    <div class="idol-card">
+                        <div class="idol-name">마마무</div>
+                        <div class="debut-year">2014</div>
+                    </div>
+                    <div class="idol-card">
+                        <div class="idol-name">러블리즈</div>
+                        <div class="debut-year">2014</div>
+                    </div>
+                    <div class="idol-card">
+                        <div class="idol-name">레드벨벳</div>
+                        <div class="debut-year">2014</div>
+                    </div>
+                    <div class="idol-card">
+                        <div class="idol-name">TWICE</div>
+                        <div class="debut-year">2015</div>
+                    </div>
+                    <div class="idol-card">
+                        <div class="idol-name">여자친구</div>
+                        <div class="debut-year">2015</div>
+                    </div>
+                    <div class="idol-card">
+                        <div class="idol-name">CLC</div>
+                        <div class="debut-year">2015</div>
+                    </div>
+                    <div class="idol-card">
+                        <div class="idol-name">다이아</div>
+                        <div class="debut-year">2015</div>
+                    </div>
+                    <div class="idol-card">
+                        <div class="idol-name">오마이걸</div>
+                        <div class="debut-year">2015</div>
+                    </div>
+                    <div class="idol-card">
+                        <div class="idol-name">BLACKPINK</div>
+                        <div class="debut-year">2016</div>
+                    </div>
+                    <div class="idol-card">
+                        <div class="idol-name">우주소녀</div>
+                        <div class="debut-year">2016</div>
+                    </div>
+                    <div class="idol-card">
+                        <div class="idol-name">모모랜드</div>
+                        <div class="debut-year">2016</div>
+                    </div>
+                    <div class="idol-card">
+                        <div class="idol-name">구구단</div>
+                        <div class="debut-year">2016</div>
+                    </div>
+                    <div class="idol-card">
+                        <div class="idol-name">드림캐쳐</div>
+                        <div class="debut-year">2017</div>
+                    </div>
+                    <div class="idol-card">
+                        <div class="idol-name">체리블렛</div>
+                        <div class="debut-year">2017</div>
+                    </div>
+                    <div class="idol-card">
+                        <div class="idol-name">위키미키</div>
+                        <div class="debut-year">2017</div>
+                    </div>
+                    <div class="idol-card">
+                        <div class="idol-name">프로미스나인</div>
+                        <div class="debut-year">2017</div>
+                    </div>
+                    <div class="idol-card">
+                        <div class="idol-name">여자아이들</div>
+                        <div class="debut-year">2018</div>
+                    </div>
+                    <div class="idol-card">
+                        <div class="idol-name">EVERGLOW</div>
+                        <div class="debut-year">2019</div>
+                    </div>
+                    <div class="idol-card">
+                        <div class="idol-name">알렉사</div>
+                        <div class="debut-year">2019</div>
+                    </div>
+                    <div class="idol-card">
+                        <div class="idol-name">ITZY</div>
+                        <div class="debut-year">2019</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 4세대 -->
+            <div class="generation-section">
+                <div class="generation-title gen4">🚀 4세대 (2020년대~)</div>
+                <div class="idol-grid">
+                    <div class="idol-card">
+                        <div class="idol-name">에스파</div>
+                        <div class="debut-year">2020</div>
+                    </div>
+                    <div class="idol-card">
+                        <div class="idol-name">STAYC</div>
+                        <div class="debut-year">2020</div>
+                    </div>
+                    <div class="idol-card">
+                        <div class="idol-name">첫사랑</div>
+                        <div class="debut-year">2020</div>
+                    </div>
+                    <div class="idol-card">
+                        <div class="idol-name">위클리</div>
+                        <div class="debut-year">2020</div>
+                    </div>
+                    <div class="idol-card">
+                        <div class="idol-name">브브걸</div>
+                        <div class="debut-year">2020</div>
+                    </div>
+                    <div class="idol-card">
+                        <div class="idol-name">BLACKSWAN</div>
+                        <div class="debut-year">2020</div>
+                    </div>
+                    <div class="idol-card">
+                        <div class="idol-name">시그니처</div>
+                        <div class="debut-year">2020</div>
+                    </div>
+                    <div class="idol-card">
+                        <div class="idol-name">SECRET NUMBER</div>
+                        <div class="debut-year">2020</div>
+                    </div>
+                    <div class="idol-card">
+                        <div class="idol-name">NIZIU</div>
+                        <div class="debut-year">2020</div>
+                    </div>
+                    <div class="idol-card">
+                        <div class="idol-name">IVE</div>
+                        <div class="debut-year">2021</div>
+                    </div>
+                    <div class="idol-card">
+                        <div class="idol-name">퍼플키스</div>
+                        <div class="debut-year">2021</div>
+                    </div>
+                    <div class="idol-card">
+                        <div class="idol-name">KEP1ER</div>
+                        <div class="debut-year">2021</div>
+                    </div>
+                    <div class="idol-card">
+                        <div class="idol-name">Billlie</div>
+                        <div class="debut-year">2021</div>
+                    </div>
+                    <div class="idol-card">
+                        <div class="idol-name">이세계아이돌</div>
+                        <div class="debut-year">2021</div>
+                    </div>
+                    <div class="idol-card">
+                        <div class="idol-name">뉴진스</div>
+                        <div class="debut-year">2022</div>
+                    </div>
+                    <div class="idol-card">
+                        <div class="idol-name">NMIXX</div>
+                        <div class="debut-year">2022</div>
+                    </div>
+                    <div class="idol-card">
+                        <div class="idol-name">트리플에스</div>
+                        <div class="debut-year">2022</div>
+                    </div>
+                    <div class="idol-card">
+                        <div class="idol-name">VIVIZ</div>
+                        <div class="debut-year">2022</div>
+                    </div>
+                    <div class="idol-card">
+                        <div class="idol-name">라필루스</div>
+                        <div class="debut-year">2022</div>
+                    </div>
+                    <div class="idol-card">
+                        <div class="idol-name">XG</div>
+                        <div class="debut-year">2022</div>
+                    </div>
+                    <div class="idol-card">
+                        <div class="idol-name">르세라핌</div>
+                        <div class="debut-year">2022</div>
+                    </div>
+                    <div class="idol-card">
+                        <div class="idol-name">FIFTY FIFTY</div>
+                        <div class="debut-year">2022</div>
+                    </div>
+                    <div class="idol-card">
+                        <div class="idol-name">CLASS:y</div>
+                        <div class="debut-year">2022</div>
+                    </div>
+                    <div class="idol-card">
+                        <div class="idol-name">CSR</div>
+                        <div class="debut-year">2022</div>
+                    </div>
+                    <div class="idol-card">
+                        <div class="idol-name">THE NEW SIX</div>
+                        <div class="debut-year">2023</div>
+                    </div>
+                    <div class="idol-card">
+                        <div class="idol-name">BABYMONSTER</div>
+                        <div class="debut-year">2023</div>
+                    </div>
+                    <div class="idol-card">
+                        <div class="idol-name">QWER</div>
+                        <div class="debut-year">2023</div>
+                    </div>
+                    <div class="idol-card">
+                        <div class="idol-name">이븐</div>
+                        <div class="debut-year">2024</div>
+                    </div>
+                    <div class="idol-card">
+                        <div class="idol-name">ILLIT</div>
+                        <div class="debut-year">2024</div>
+                    </div>
+                    <div class="idol-card">
+                        <div class="idol-name">ARTMS</div>
+                        <div class="debut-year">2024</div>
+                    </div>
+                    <div class="idol-card">
+                        <div class="idol-name">BADVILLAIN</div>
+                        <div class="debut-year">2024</div>
+                    </div>
+                    <div class="idol-card">
+                        <div class="idol-name">Candy Shop</div>
+                        <div class="debut-year">2024</div>
+                    </div>
+                    <div class="idol-card">
+                        <div class="idol-name">izna</div>
+                        <div class="debut-year">2024</div>
+                    </div>
+                    <div class="idol-card">
+                        <div class="idol-name">헌트릭스</div>
+                        <div class="debut-year">2025</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="section mixed-groups">
+            <h2>👫 혼성 그룹 (세대별)</h2>
+            
+            <!-- 1세대 -->
+            <div class="generation-section">
+                <div class="generation-title gen1">🌟 1세대 (1990년대 후반)</div>
+                <div class="idol-grid">
+                    <div class="idol-card">
+                        <div class="idol-name">쿨</div>
+                        <div class="debut-year">1994</div>
+                    </div>
+                    <div class="idol-card">
+                        <div class="idol-name">유피</div>
+                        <div class="debut-year">1996</div>
+                    </div>
+                    <div class="idol-card">
+                        <div class="idol-name">코요태</div>
+                        <div class="debut-year">1998</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 2세대 -->
+            <div class="generation-section">
+                <div class="generation-title gen2">🔥 2세대 (2000년대 초~2010년대 초)</div>
+                <div class="idol-grid">
+                    <div class="idol-card">
+                        <div class="idol-name">거북이</div>
+                        <div class="debut-year">2001</div>
+                    </div>
+                    <div class="idol-card">
+                        <div class="idol-name">타이푼</div>
+                        <div class="debut-year">2006</div>
+                    </div>
+                    <div class="idol-card">
+                        <div class="idol-name">어반자카파</div>
+                        <div class="debut-year">2009</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 3세대 -->
+            <div class="generation-section">
+                <div class="generation-title gen3">⚡ 3세대 (2010년대 중반~후반)</div>
+                <div class="idol-grid">
+                    <div class="idol-card">
+                        <div class="idol-name">악동뮤지션</div>
+                        <div class="debut-year">2014</div>
+                    </div>
+                    <div class="idol-card">
+                        <div class="idol-name">KARD</div>
+                        <div class="debut-year">2017</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // 검색 기능
+        const searchInput = document.getElementById('searchInput');
+        const boyGroups = document.querySelector('.boy-groups');
+        const girlGroups = document.querySelector('.girl-groups');
+        const mixedGroups = document.querySelector('.mixed-groups');
+        const boyGroupCount = document.getElementById('boyGroupCount');
+        const girlGroupCount = document.getElementById('girlGroupCount');
+        const mixedGroupCount = document.getElementById('mixedGroupCount');
+        const totalCount = document.getElementById('totalCount');
+
+        function updateCounts() {
+            const visibleBoyGroups = boyGroups.querySelectorAll('.idol-card:not(.hidden)').length;
+            const visibleGirlGroups = girlGroups.querySelectorAll('.idol-card:not(.hidden)').length;
+            const visibleMixedGroups = mixedGroups.querySelectorAll('.idol-card:not(.hidden)').length;
+            
+            boyGroupCount.textContent = visibleBoyGroups;
+            girlGroupCount.textContent = visibleGirlGroups;
+            mixedGroupCount.textContent = visibleMixedGroups;
+            totalCount.textContent = visibleBoyGroups + visibleGirlGroups + visibleMixedGroups;
+        }
+
+        searchInput.addEventListener('input', function() {
+            const searchTerm = this.value.toLowerCase();
+            const allCards = document.querySelectorAll('.idol-card');
+            
+            allCards.forEach(card => {
+                const nameElement = card.querySelector('.idol-name');
+                const groupName = nameElement ? nameElement.textContent.toLowerCase() : card.textContent.toLowerCase();
+                if (groupName.includes(searchTerm)) {
+                    card.classList.remove('hidden');
+                } else {
+                    card.classList.add('hidden');
+                }
+            });
+            
+            updateCounts();
+        });
+
+        // 카드 클릭 이벤트
+        document.querySelectorAll('.idol-card').forEach(card => {
+            card.addEventListener('click', function() {
+                const nameElement = this.querySelector('.idol-name');
+                const yearElement = this.querySelector('.debut-year');
+                const groupName = nameElement ? nameElement.textContent : this.textContent;
+                const debutYear = yearElement ? yearElement.textContent : '';
+                
+                if (debutYear) {
+                    alert(`${groupName} (${debutYear}년 데뷔)\n더 자세한 정보를 보시려면 공식 사이트를 방문해주세요! 🎵`);
+                } else {
+                    alert(`${groupName}에 대한 더 자세한 정보를 보시려면 공식 사이트를 방문해주세요! 🎵`);
+                }
+            });
+        });
+
+        // 초기 카운트 설정
+        updateCounts();
+    </script>
+</body>
+</html>
